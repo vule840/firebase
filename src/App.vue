@@ -4,9 +4,44 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
     </div>
+   <article v-for="(location, idx) in locations" :key="idx">
+ <div>Mrma</div>
+    <h1>{{ location.name }}</h1>
+  </article>
     <router-view/>
+    <!--   <p v-for="doc of documents">
+    {{doc.name}}
+  </p> -->
+  
   </div>
 </template>
+
+<script>
+import {db} from './firebase';
+
+export default {
+  data() {
+    return {
+       locations: []
+    }
+  },
+  created(){
+    // console.log(db.ref('members'))
+
+    db.collection('locations').get().then((podaci) =>{
+  podaci.docs.forEach(doc =>{
+    console.log(doc.data())
+  })
+   console.log(locations)
+})
+   },
+  firestore () {
+    return {
+      locations: db.collection('locations')
+    }
+  }
+}
+</script>
 
 <style lang="scss">
 #app {
