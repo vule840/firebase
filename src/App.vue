@@ -4,29 +4,33 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
     </div>
-   <article v-for="(location, idx) in locations" :key="idx">
+   <!-- <article v-for="(location, idx) in locations" :key="idx">
  <div>Mrma</div>
     <h1>{{ location.name }}</h1>
-  </article>
+  </article> -->
     <router-view/>
     <!--   <p v-for="doc of documents">
     {{doc.name}}
   </p> -->
-  
+    <Register/>
   </div>
 </template>
 
 <script>
 import {db} from './firebase';
+import Register from "@/components/Register.vue";
 
 export default {
+  components: {
+    Register
+  },
   data() {
     return {
        locations: []
     }
   },
   created(){
-    // console.log(db.ref('members'))
+  console.log(db)
 
     db.collection('locations').get().then((podaci) =>{
   podaci.docs.forEach(doc =>{
